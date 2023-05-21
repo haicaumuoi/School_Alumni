@@ -1,39 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { ToastContainer, toast } from 'react-toastify';
+import React, { useState, useEffect } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
+import { Route, Routes } from 'react-router-dom';
+import config from './component/config';
+import ErrorPage from './component/pages/errorPage/ErrorPage';
+import adminRoutes from './component/routes/routes';
+import DefaultLayout from './component/layouts/DefaultLayout';
+import LandingPage from './component/pages/landingPage/LandingPage';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-  const notify = () => toast("Wow so easy!");
+  const [routeList, setRouteList] = useState([]);
+  const authenticated = false;
+  const userType = 'admin';
+
+  useEffect(() => {
+    switch (userType) {
+      case 'admin':
+        setRouteList(adminRoutes);
+        break;
+      default:
+        break;
+    }
+  }, [userType]);
+
   return (
-    <>
-      <ToastContainer />
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <button onClick={notify}>Notify!</button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <Routes>
+        {!authenticated ? (
+          <>
+            <Route path={config.routes.landingPage} element={<LandingPage />} />
+          </>
+        ) : (
+          routeList.map((route, index) => {
+            const Page = route.component;
+            const Layout = DefaultLayout;
+
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <Layout>
+                    <Page />
+                  </Layout>
+                }
+              />
+            );
+          })
+        )}
+        <Route path="*" element={<ErrorPage isAuthenticated={authenticated} />} />
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;
