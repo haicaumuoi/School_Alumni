@@ -14,7 +14,7 @@ const Login = () => {
     return (
         <Typography>
             <Title>Login{additionalPath && ` - ${additionalPath}`}</Title>
-            <Button type="primary" onClick={() => {
+            <Button onClick={() => {
                 addNotification('info', "", 'login failed')
             }}>Login</Button>
         </Typography>

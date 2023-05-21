@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
   const [routeList, setRouteList] = useState([]);
-  const authenticated = true;
+  const authenticated = false;
   const userType = 'admin';
 
   const isDarkMode = useSelector(state => state.darkMode);
@@ -33,7 +33,6 @@ function App() {
       theme={{
         algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
         token: {
-          colorPrimary: '#73d13d',
         }
       }}>
       <Routes>

@@ -6,9 +6,11 @@ import { toggleDarkMode } from '../../../redux/slices/darkModeSlice';
 import { green } from '@ant-design/colors';
 import { useNavigate } from 'react-router-dom';
 import ErrorPage from '../errorPage/ErrorPage';
+import { googleSignIn, facebookSignIn } from '../../utilities/firebase/firebase';
+
 
 const LandingPage = () => {
-    const authenticated = true;
+    const authenticated = false;
     const navigate = useNavigate();
     const isDarkMode = useSelector((state) => state.darkMode);
     const dispatch = useDispatch();
@@ -37,6 +39,8 @@ const LandingPage = () => {
                 prompt
             </Button>
             <Button onClick={handleToggleDarkMode}>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</Button>
+            <Button onClick={() => googleSignIn()}>Sign in with google</Button>
+            <Button onClick={() => facebookSignIn()}>Sign in with facebook</Button>
         </Space >
 
     )

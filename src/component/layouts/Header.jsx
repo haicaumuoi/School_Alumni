@@ -16,9 +16,9 @@ const HeaderComponent = () => {
     };
 
     return (
-        <Header>
+        <Header className='px-20'>
             <Menu theme={isDarkMode ? 'dark' : 'light'} mode="horizontal" defaultSelectedKeys={['1']}>
-                <Menu.Item key="1" icon={<HomeOutlined />} className='h-96'>
+                <Menu.Item key="1" icon={<HomeOutlined />}>
                     Home
                 </Menu.Item>
                 <Menu.Item key="2" icon={<UserOutlined />}>
