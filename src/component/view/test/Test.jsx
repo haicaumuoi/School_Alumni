@@ -1,9 +1,12 @@
+import { Typography } from 'antd'
 import React from 'react'
 
-const Test = () => {
+const Test1 = () => {
     return (
-        <div>Test</div>
+        <Typography>
+            <Typography.Title>Test1</Typography.Title>
+        </Typography>
     )
 }
 
-export default Test
+export default Test1
