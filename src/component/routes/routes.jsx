@@ -2,7 +2,7 @@ import config from "../config";
 import LandingPage from "../pages/landingPage/LandingPage";
 import Home from "../view/home/Home";
 import Login from "../view/login/Login";
-import Test1 from "../view/test/test";
+import Test1 from "../view/test1/Test1";
 
 
 const landingPageRoute = {
