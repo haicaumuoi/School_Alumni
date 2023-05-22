@@ -1,6 +1,7 @@
 import React from 'react';
-import { Typography } from 'antd';
+import { Button, Typography } from 'antd';
 import { useLocation } from 'react-router-dom';
+import { addNotification } from '../../utilities/commonServices/CommonService';
 
 const { Title } = Typography;
 
@@ -13,6 +14,9 @@ const Login = () => {
     return (
         <Typography>
             <Title>Login{additionalPath && ` - ${additionalPath}`}</Title>
+            <Button onClick={() => {
+                addNotification('info', "", 'login failed')
+            }}>Login</Button>
         </Typography>
     );
 };

@@ -1,24 +1,50 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout, Breadcrumb } from 'antd';
+import { useLocation, Link } from 'react-router-dom';
+import HeaderComponent from './Header';
 import Sidebar from './Sidebar';
 
-const { Header, Footer, Content } = Layout;
+const { Content } = Layout;
 
-function DefaultLayout({ children }) {
+const DefaultLayout = ({ children }) => {
+    const location = useLocation();
+    const pathSegments = location.pathname.split('/').filter(Boolean);
+
+    const breadcrumbItems = pathSegments.map((segment, index) => {
+        const breadcrumbPath = `/${pathSegments.slice(0, index + 1).join('/')}`;
+        return {
+            title: segment,
+            path: breadcrumbPath,
+            isCurrent: index === pathSegments.length - 1,
+        };
+    });
+
     return (
-        <Layout style={{ minHeight: '100vh' }}>
-            <Header style={{ color: '#fff' }}>Header</Header>
+        <Layout className='min-h-screen'>
+            <HeaderComponent />
+
             <Layout>
                 <Sidebar />
-                <Layout style={{ padding: '0 24px 24px' }}>
-                    <Content style={{ background: '#fff', padding: 24, margin: 0 }}>
+
+                <Layout className="p-4">
+                    <Content className="p-4">
+                        <Breadcrumb className='mb-4'>
+                            {breadcrumbItems.map((item) => (
+                                <Breadcrumb.Item key={item.path}>
+                                    {item.isCurrent ? (
+                                        <span>{item.title}</span>
+                                    ) : (
+                                        <Link to={item.path}>{item.title}</Link>
+                                    )}
+                                </Breadcrumb.Item>
+                            ))}
+                        </Breadcrumb>
                         {children}
                     </Content>
                 </Layout>
             </Layout>
-            <Footer style={{ textAlign: 'center' }}>Footer</Footer>
         </Layout>
     );
-}
+};
 
 export default DefaultLayout;

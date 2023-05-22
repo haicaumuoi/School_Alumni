@@ -4,6 +4,7 @@ import Activity from "../view/activity/Activity";
 import Home from "../view/home/Home";
 import Login from "../view/login/Login";
 import schoolInfo from "../view/schoolInfo/schoolInfo";
+import Test1 from "../view/test1/Test1";
 
 
 const landingPageRoute = {
@@ -26,9 +27,13 @@ const activityRoutes = {
     path: config.routes.activity,
     component: Activity,
 }
+const abcRoutes = {
+    path: config.routes.abc,
+    component: Test1,
+}
 
 // const superAdminRoutes = [...classAdminRoutes, userListRoutes, userPermissionRoutes]
-const adminRoutes = [landingPageRoute, homeRoutes, loginRoutes, schoolInfoRoutes, activityRoutes]
+const adminRoutes = [landingPageRoute, homeRoutes, loginRoutes, schoolInfoRoutes, activityRoutes, abcRoutes]
 export default adminRoutes;
 
 // export { superAdminRoutes, classAdminRoutes, trainerRoutes, studentRoutes };

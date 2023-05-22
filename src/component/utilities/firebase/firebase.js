@@ -1,3 +1,4 @@
+import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider   } from "firebase/auth";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -19,3 +20,40 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+//GOOGLE SIGN IN
+const googleProvider = new GoogleAuthProvider();
+
+const auth = getAuth();
+const googleSignIn = () => { signInWithPopup(auth, googleProvider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+    console.log(token)
+  }).catch((error) => {
+  })};
+
+//FACEBOOK SIGN IN
+const fbProvider = new FacebookAuthProvider();
+const facebookSignIn = () => {signInWithPopup(auth, fbProvider)
+  .then((result) => {
+    // The signed-in user info.
+    const user = result.user;
+
+    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    const credential = FacebookAuthProvider.credentialFromResult(result);
+    const accessToken = credential.accessToken;
+
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  })
+  .catch((error) => {
+  })};
+
+
+export { googleSignIn, facebookSignIn };
