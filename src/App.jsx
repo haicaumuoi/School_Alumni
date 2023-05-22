@@ -10,7 +10,7 @@ import './App.css';
 
 function App() {
   const [routeList, setRouteList] = useState([]);
-  const authenticated = false;
+  const authenticated = true;
   const userType = 'admin';
 
   useEffect(() => {
