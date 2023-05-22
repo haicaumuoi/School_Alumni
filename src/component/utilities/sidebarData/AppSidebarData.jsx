@@ -117,11 +117,4 @@ export const sidebarData = [
       },
     ],
   },
-  {
-    name: "home",
-    path: "abc",
-    exact: true,
-    icon: <SmileOutlined></SmileOutlined>,
-    title: "Home",
-  },
 ];
