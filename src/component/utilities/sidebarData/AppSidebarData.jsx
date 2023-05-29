@@ -1,6 +1,5 @@
 import {
   SmileOutlined,
-  SettingFilled,
   InfoCircleFilled,
   WalletFilled,
   HomeFilled,
@@ -10,7 +9,7 @@ import {
   LayoutFilled,
   ContainerFilled,
   BankFilled,
-  FileExclamationFilled
+  FileExclamationFilled,
 } from "@ant-design/icons";
 
 export const sidebarData = [
@@ -18,37 +17,37 @@ export const sidebarData = [
     name: "home",
     path: "home",
     exact: true,
-    icon: <SmileOutlined></SmileOutlined>,
+    icon: <HomeFilled />,
     title: "Home",
   },
-  {
-    name: "login",
-    path: "login",
-    title: "Login",
-    icon: <SettingFilled></SettingFilled>,
-    hideSubMenu: false,
-    subMenu: [
-      {
-        index: true,
-        icon: <SettingFilled></SettingFilled>,
-        title: "2",
-      },
-      {
-        path: "add",
-        hide: true,
-        exact: true,
-        icon: <SettingFilled></SettingFilled>,
-        title: "3",
-      },
-      {
-        path: ":id",
-        hide: true,
-        exact: true,
-        icon: <SettingFilled></SettingFilled>,
-        title: "4",
-      },
-    ],
-  },
+  // {
+  //   name: "login",
+  //   path: "login",
+  //   title: "Login",
+  //   icon: <SettingFilled></SettingFilled>,
+  //   hideSubMenu: false,
+  //   subMenu: [
+  //     {
+  //       index: true,
+  //       icon: <SettingFilled></SettingFilled>,
+  //       title: "2",
+  //     },
+  //     {
+  //       path: "add",
+  //       hide: true,
+  //       exact: true,
+  //       icon: <SettingFilled></SettingFilled>,
+  //       title: "3",
+  //     },
+  //     {
+  //       path: ":id",
+  //       hide: true,
+  //       exact: true,
+  //       icon: <SettingFilled></SettingFilled>,
+  //       title: "4",
+  //     },
+  //   ],
+  // },
   {
     name: "schoolInfo",
     path: "schoolInfo",
@@ -60,11 +59,6 @@ export const sidebarData = [
         path: "school",
         icon: <InfoCircleFilled />,
         title: "Infomation",
-      },
-      {
-        path: "vnpay",
-        icon: <WalletFilled />,
-        title: "Payment Method",
       },
       {
         path: "grade",
@@ -105,16 +99,16 @@ export const sidebarData = [
         icon: <BankFilled />,
         title: "Funds",
       },
-      {
-        path: "recruitments",
-        icon: <MessageFilled />,
-        title: "Recruitment",
-      },
-      {
-        path: "reports",
-        icon: <FileExclamationFilled />,
-        title: "Report",
-      },
+      // {
+      //   path: "recruitments",
+      //   icon: <MessageFilled />,
+      //   title: "Recruitment",
+      // },
+      // {
+      //   path: "reports",
+      //   icon: <FileExclamationFilled />,
+      //   title: "Report",
+      // },
     ],
   },
 ];
