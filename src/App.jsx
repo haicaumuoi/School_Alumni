@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
   const [routeList, setRouteList] = useState([]);
-  const authenticated = false;
+  const authenticated = true;
   const userType = 'admin';
 
   const isDarkMode = useSelector(state => state.darkMode);
