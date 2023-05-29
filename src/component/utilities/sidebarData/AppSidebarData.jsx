@@ -61,11 +61,6 @@ export const sidebarData = [
         title: "Infomation",
       },
       {
-        path: "vnpay",
-        icon: <WalletFilled />,
-        title: "Payment Method",
-      },
-      {
         path: "grade",
         icon: <HomeFilled />,
         title: "School Year and Class",
@@ -104,16 +99,16 @@ export const sidebarData = [
         icon: <BankFilled />,
         title: "Funds",
       },
-      {
-        path: "recruitments",
-        icon: <MessageFilled />,
-        title: "Recruitment",
-      },
-      {
-        path: "reports",
-        icon: <FileExclamationFilled />,
-        title: "Report",
-      },
+      // {
+      //   path: "recruitments",
+      //   icon: <MessageFilled />,
+      //   title: "Recruitment",
+      // },
+      // {
+      //   path: "reports",
+      //   icon: <FileExclamationFilled />,
+      //   title: "Report",
+      // },
     ],
   },
 ];
