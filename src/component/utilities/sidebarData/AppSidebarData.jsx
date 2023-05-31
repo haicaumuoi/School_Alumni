@@ -10,6 +10,7 @@ import {
   ContainerFilled,
   BankFilled,
   FileExclamationFilled,
+  LoginOutlined,
 } from "@ant-design/icons";
 
 export const sidebarData = [
@@ -20,34 +21,20 @@ export const sidebarData = [
     icon: <HomeFilled />,
     title: "Home",
   },
-  // {
-  //   name: "login",
-  //   path: "login",
-  //   title: "Login",
-  //   icon: <SettingFilled></SettingFilled>,
-  //   hideSubMenu: false,
-  //   subMenu: [
-  //     {
-  //       index: true,
-  //       icon: <SettingFilled></SettingFilled>,
-  //       title: "2",
-  //     },
-  //     {
-  //       path: "add",
-  //       hide: true,
-  //       exact: true,
-  //       icon: <SettingFilled></SettingFilled>,
-  //       title: "3",
-  //     },
-  //     {
-  //       path: ":id",
-  //       hide: true,
-  //       exact: true,
-  //       icon: <SettingFilled></SettingFilled>,
-  //       title: "4",
-  //     },
-  //   ],
-  // },
+  {
+    name: "login",
+    path: "login",
+    title: "Login",
+    icon: <LoginOutlined />,
+    hideSubMenu: false,
+    // subMenu: [
+    //   {
+    //     index: true,
+    //     icon: <HomeFilled></HomeFilled>,
+    //     title: "2",
+    //   },
+    // ],
+  },
   {
     name: "schoolInfo",
     path: "schoolInfo",

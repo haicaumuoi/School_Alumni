@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Typography } from 'antd';
 import { useLocation } from 'react-router-dom';
 import { addNotification } from '../../utilities/commonServices/CommonService';
+import LoginPage from '../../pages/loginPage/LoginPage';
 
 const { Title } = Typography;
 
@@ -12,12 +13,13 @@ const Login = () => {
     const additionalPath = pathSegments.slice(1).join(' / ');
 
     return (
-        <Typography>
-            <Title>Login{additionalPath && ` - ${additionalPath}`}</Title>
-            <Button onClick={() => {
-                addNotification('info', "", 'login failed')
-            }}>Login</Button>
-        </Typography>
+        // <Typography>
+        //     <Title>Login{additionalPath && ` - ${additionalPath}`}</Title>
+        //     <Button onClick={() => {
+        //         addNotification('info', "", 'login failed')
+        //     }}>Login</Button>
+        // </Typography>
+        <LoginPage />
     );
 };
 

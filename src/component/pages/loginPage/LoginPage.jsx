@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
-import { Button, Form, Input, Typography, Space, Divider } from "antd";
+import { Button, Form, Input, Typography, Space, Divider, message } from "antd";
 import {
   GoogleOutlined,
-  FacebookOutlined,
-  TwitterOutlined,
+  FacebookOutlined
 } from "@ant-design/icons";
 import {
   googleSignIn,
@@ -29,6 +28,8 @@ const LoginPage = () => {
       });
     }, 6000);
   };
+
+  
   return (
     <div className="appBg">
       <Form className="loginForm">
