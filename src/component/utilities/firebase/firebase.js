@@ -25,7 +25,7 @@ const analytics = getAnalytics(app);
 const googleProvider = new GoogleAuthProvider();
 
 const auth = getAuth();
-const googleSignIn = () => { signInWithPopup(auth, googleProvider)
+const ngoogleSignIn = () => { signInWithPopup(auth, googleProvider)
   .then((result) => {
     // This gives you a Google Access Token. You can use it to access the Google API.
     const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -35,6 +35,7 @@ const googleSignIn = () => { signInWithPopup(auth, googleProvider)
     // IdP data available using getAdditionalUserInfo(result)
     // ...
     console.log(token)
+    addNotification("success", "", "success message");
   }).catch((error) => {
   })};
 
