@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "@ant-design/colors": "^7.0.0",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.3",
     "@reduxjs/toolkit": "^1.9.5",
     "antd": "^5.5.0",
     "firebase": "^9.22.0",
@@ -19,6 +23,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
+    "react-icons": "^4.9.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.2",
     "react-toastify": "^9.1.3",
