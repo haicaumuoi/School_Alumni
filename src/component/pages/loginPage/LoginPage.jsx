@@ -75,14 +75,14 @@ const LoginPage = () => {
             className="socialIcon-google"
             onClick={() => {
               googleSignIn();
-              addNotification("success", "", "success message");
+              // addNotification("success", "", "success message");
             }}
           />
           <FacebookFilled
             className="socialIcon-facebook"
             onClick={() => {
               facebookSignIn();
-              addNotification("success", "", "success message");
+              // addNotification("success", "", "success message");
             }}
             style={{color: "blue"}}
           />
