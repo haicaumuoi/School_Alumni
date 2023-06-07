@@ -1,26 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
-import { Route, Routes } from 'react-router-dom';
-import config from './component/config';
-import ErrorPage from './component/pages/errorPage/ErrorPage';
-import adminRoutes from './component/routes/routes';
-import DefaultLayout from './component/layouts/DefaultLayout';
-import LandingPage from './component/pages/landingPage/LandingPage';
+import React, { useState, useEffect } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { Route, Routes } from "react-router-dom";
+import config from "./component/config";
+import ErrorPage from "./component/pages/errorPage/ErrorPage";
+import adminRoutes from "./component/routes/routes";
+import DefaultLayout from "./component/layouts/DefaultLayout";
+import LandingPage from "./component/pages/landingPage/LandingPage";
 import { ConfigProvider, theme, Button, Card } from "antd";
-import './App.css';
-import { useDispatch, useSelector } from 'react-redux';
+import "./App.css";
+import { useDispatch, useSelector } from "react-redux";
+import Login from "./component/view/login/Login";
 
 function App() {
   const [routeList, setRouteList] = useState([]);
   const authenticated = true;
-  const userType = 'admin';
+  const userType = "admin";
 
-  const isDarkMode = useSelector(state => state.darkMode);
+  const isDarkMode = useSelector((state) => state.darkMode);
   const { defaultAlgorithm, darkAlgorithm } = theme;
 
   useEffect(() => {
     switch (userType) {
-      case 'admin':
+      case "admin":
         setRouteList(adminRoutes);
         break;
       default:
@@ -32,9 +33,9 @@ function App() {
     <ConfigProvider
       theme={{
         algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
-        token: {
-        }
-      }}>
+        token: {},
+      }}
+    >
       <Routes>
         {!authenticated ? (
           <>
@@ -58,7 +59,10 @@ function App() {
             );
           })
         )}
-        <Route path="*" element={<ErrorPage isAuthenticated={authenticated} />} />
+        <Route
+          path="*"
+          element={<ErrorPage isAuthenticated={authenticated} />}
+        />
       </Routes>
     </ConfigProvider>
   );

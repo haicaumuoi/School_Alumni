@@ -62,6 +62,7 @@
             <Input.Password placeholder="Enter your password" />
           </Form.Item>
           <Button
+            className="buttonLogin"
             type="primary"
             loading={loadings[0]}
             onClick={() => enterLoading(0)}

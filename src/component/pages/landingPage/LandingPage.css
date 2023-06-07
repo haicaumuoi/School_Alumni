@@ -9,14 +9,16 @@
     height: auto;
   }
   .landingPage {
-    min-height: 100vh;
+    min-height: 0vh;
     width: 85vw;
     max-width: 1900px;
     margin: 0rem auto;
+
   }
   body {
     max-width: 100%;
     overflow-x: hidden;
+    height: 60vh;
   }
   
   body {
@@ -113,12 +115,17 @@
     align-items: center;
     justify-content: center;
   }
+
   .secondary-button svg {
     margin-left: 0.75rem;
     font-size: 1.5rem;
+    display: inline-block;
   }
   .secondary-button:hover {
     background-color: #e48f0f;
+  }
+  .secondary-button:hover a {
+    color: black;
   }
   .about-section-container {
     margin-top: 20rem;
@@ -310,9 +317,9 @@
     font-weight: 600;
   }
   .nav-logo-container {
-    width: 20%;
-    height: 20%;
-    margin-top: 0;
+    width: 15%;
+    height: 15%;
+    /* margin-top: 0; */
   }
   
   @media (max-width: 1000px) {

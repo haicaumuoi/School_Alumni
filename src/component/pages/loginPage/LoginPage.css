@@ -3,9 +3,12 @@
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: 83vh;
     background: url('./bg.jpg');
     background-size: cover;
+    background-position: 3%;
+    backdrop-filter: blur(5px);
+    
 }
 
 .loginForm {
@@ -14,6 +17,12 @@
     backdrop-filter: blur(3px);
     padding: 16px 16px 16px 16px;
     border-radius: 16px;
+    margin-right: 0;
+
+}
+
+.loginForm .buttonLogin {
+    background-color: #001529;
 }
 
 .socialLogin {

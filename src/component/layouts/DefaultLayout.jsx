@@ -1,10 +1,10 @@
 import React from 'react';
-import { Layout, Breadcrumb } from 'antd';
+import { Layout, Breadcrumb} from 'antd';
 import { useLocation, Link } from 'react-router-dom';
 import HeaderComponent from './Header';
 import Sidebar from './Sidebar';
 
-const { Content } = Layout;
+const { Content, Footer } = Layout;
 
 const DefaultLayout = ({ children }) => {
     const location = useLocation();
@@ -26,8 +26,8 @@ const DefaultLayout = ({ children }) => {
             <Layout>
                 <Sidebar />
 
-                <Layout className="p-4">
-                    <Content className="p-4">
+                {/* <Layout className="p-4">
+                    <Content className="p-4"> */}
                         {/* <Breadcrumb className='mb-4'>
                             {breadcrumbItems.map((item) => (
                                 <Breadcrumb.Item key={item.path}>
@@ -40,9 +40,10 @@ const DefaultLayout = ({ children }) => {
                             ))}
                         </Breadcrumb> */}
                         {children}
-                    </Content>
-                </Layout>
+                    {/* </Content>
+                </Layout> */}
             </Layout>
+            <Footer style={{ textAlign: 'center', background: '#001529', color: 'white' }}>School Alumni ©2023 | Created by Hapi-Team</Footer>
         </Layout>
     );
 };
