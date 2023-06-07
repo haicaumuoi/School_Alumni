@@ -14,10 +14,10 @@ const Home = () => {
         </div>
         <div className="home-text-section">
           <h1 className="primary-heading">
-            School Alumni
+            School Alumni - Super ADMIN
           </h1>
           <p className="primary-text">
-            Lorem ipsum
+            Manage education pages
           </p>
           <button className="secondary-button">
             For more <FiArrowRight />{" "}

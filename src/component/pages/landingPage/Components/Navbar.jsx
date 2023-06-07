@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
-import Logo from "../Assets/alumni.png";
+import Logo from "../Assets/alumni-logo-background.png";
 import { BsCart2 } from "react-icons/bs";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import Box from "@mui/material/Box";
@@ -46,7 +46,7 @@ const Navbar = () => {
     <nav>
       <div className="nav-logo-container">
         {/* <img src={Logo} alt="" /> */}
-        <img src="https://www.clipartmax.com/png/small/272-2726206_alumni-logo-keep-calm-and-carry.png" alt="Alumni Logo - Keep Calm And Carry @clipartmax.com"></img>
+        <img src={Logo} alt="Alumni Logo - Keep Calm And Carry @clipartmax.com"></img>
       </div>
       <div className="navbar-links-container">
         {/* <a href="">Home</a>

@@ -75,6 +75,8 @@
   .home-image-section {
     max-width: 600px;
     flex: 1;
+    margin-bottom: 0;
+
   }
   .home-text-section {
     flex: 1;
@@ -84,10 +86,11 @@
     align-items: flex-start;
   }
   .primary-heading {
-    font-size: clamp(2rem, 5vw, 4rem);
+    font-size: clamp(1rem, 3vw, 2.5rem);
     color: #4c4c4c;
     /* line-height: 5rem; */
     max-width: 600px;
+    
   }
   .primary-text {
     font-size: clamp(1rem, 3vw, 1.5rem);
@@ -306,6 +309,11 @@
     align-items: center;
     font-weight: 600;
   }
+  .nav-logo-container {
+    width: 20%;
+    height: 20%;
+    margin-top: 0;
+  }
   
   @media (max-width: 1000px) {
     .navbar-links-container a {
@@ -322,6 +330,7 @@
   @media (max-width: 800px) {
     .nav-logo-container {
       max-width: 140px;
+      
     }
     .navbar-links-container {
       display: none;
@@ -349,6 +358,7 @@
     .primary-heading {
       text-align: center;
       max-width: 90%;
+
     }
     .primary-text {
       text-align: center;

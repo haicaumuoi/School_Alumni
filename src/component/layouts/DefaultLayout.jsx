@@ -28,8 +28,8 @@ const DefaultLayout = ({ children }) => {
 
                 <Layout className="p-4">
                     <Content className="p-4">
-                        <Breadcrumb className='mb-4'>
-                            {/* {breadcrumbItems.map((item) => (
+                        {/* <Breadcrumb className='mb-4'>
+                            {breadcrumbItems.map((item) => (
                                 <Breadcrumb.Item key={item.path}>
                                     {item.isCurrent ? (
                                         <span>{item.title}</span>
@@ -37,8 +37,8 @@ const DefaultLayout = ({ children }) => {
                                         <Link to={item.path}>{item.title}</Link>
                                     )}
                                 </Breadcrumb.Item>
-                            ))} */}
-                        </Breadcrumb>
+                            ))}
+                        </Breadcrumb> */}
                         {children}
                     </Content>
                 </Layout>
