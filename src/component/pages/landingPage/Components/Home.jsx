@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import Typography from "antd/es/typography/Typography";
 import LoginPage from "../../loginPage/LoginPage";
 
+const {Title} =  Typography;
+
 const Home = () => {
   return (
     <div className="home-container">
@@ -16,13 +18,15 @@ const Home = () => {
           <img src={BannerBackground} alt="" />
         </div>
         <div className="home-text-section">
-          <h1 className="primary-heading">School Alumni - Super ADMIN</h1>
-          <p className="primary-text">Manage education pages</p>
+          {/* <h1 className="primary-heading">School Alumni - Super ADMIN</h1> */}
+          <Title level={1} className="main-title-section">School Alumni - Super ADMIN</Title>
+          {/* <p className="primary-text">Manage education pages</p> */}
+          <Title level={4} className="second-title-section">Manage education pages</Title>
 
           <button className="secondary-button">
             <Link to="/login">
               <Typography>
-                For more <FiArrowRight />
+                Getting Started <FiArrowRight />
                 </Typography>
             </Link>
           </button>

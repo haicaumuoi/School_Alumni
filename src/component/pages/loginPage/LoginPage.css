@@ -3,12 +3,11 @@
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 80vh;
+    height: 82vh;
     background: url('./bg.jpg');
     background-size: cover;
     background-position: 3%;
     backdrop-filter: blur(5px);
-    
 }
 
 .loginForm {
@@ -39,4 +38,10 @@
 
 .socialIcon-google {
     color: rgb(204, 73, 73);
+}
+
+.loginTitle{
+    font-weight: bold;
+    font-size: 35px;
+    padding-bottom: 20px;
 }

@@ -40,6 +40,7 @@
       <div className="loginBg">
         <Form className="loginForm">
           <Typography.Title>Welcome Back!</Typography.Title>
+          {/* <h1 className="loginTitle">Welcome Back!</h1> */}
           <Form.Item rules={[
               {
                   required: true,
