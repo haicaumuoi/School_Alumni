@@ -154,7 +154,7 @@ const DashboardPage = () => {
               <>
             <a onClick={() => hide(record.key)}>Accept</a>
             <Divider type="vertical" />
-            <a>Delete</a>
+            <a>Deny</a>
             </>
           }
             title="Options"
