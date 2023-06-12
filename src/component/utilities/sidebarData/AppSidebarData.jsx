@@ -36,6 +36,13 @@ export const sidebarData = [
     // ],
   },
   {
+      name: "dashboard",
+      path: "dashboard",
+      title: "Dashboard",
+      icon: <LoginOutlined />,
+      exact: true,
+  },
+  {
     name: "schoolInfo",
     path: "schoolInfo",
     icon: <SmileOutlined></SmileOutlined>,

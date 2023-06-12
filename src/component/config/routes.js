@@ -5,6 +5,7 @@ const routes = {
   schoolInfo: "/schoolInfo/*",
   activity: "/activity/*",
   abc: "/abc",
+  dashboard: "/dashboard/*"
 };
 
 export default routes;

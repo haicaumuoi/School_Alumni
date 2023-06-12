@@ -5,9 +5,10 @@ import Home from "../view/home/Home";
 import Login from "../view/login/Login";
 import schoolInfo from "../view/schoolInfo/schoolInfo";
 import Test1 from "../view/test1/Test1";
+import Dashboard from "../view/dashboard/Dashboard";
 
 
-const landingPageRoute = {
+const landingPageRoutes = {
     path: config.routes.landingPage,
     component: LandingPage,
 }
@@ -32,8 +33,13 @@ const abcRoutes = {
     component: Test1,
 }
 
+const DashboardRoutes = {
+    path: config.routes.dashboard,
+    component: Dashboard,
+}
+
 // const superAdminRoutes = [...classAdminRoutes, userListRoutes, userPermissionRoutes]
-const adminRoutes = [landingPageRoute, homeRoutes, loginRoutes, schoolInfoRoutes, activityRoutes, abcRoutes]
+const adminRoutes = [landingPageRoutes, homeRoutes, loginRoutes, schoolInfoRoutes, activityRoutes, abcRoutes, DashboardRoutes]
 export default adminRoutes;
 
 // export { superAdminRoutes, classAdminRoutes, trainerRoutes, studentRoutes };
