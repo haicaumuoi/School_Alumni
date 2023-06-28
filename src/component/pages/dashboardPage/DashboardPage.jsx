@@ -1,5 +1,5 @@
 import { Typography } from "antd";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Space, Table, Tag, Divider } from "antd";
 import "./DashboardPage.css";
 import { Button, Popover } from "antd";
@@ -16,20 +16,44 @@ const { Column } = Table;
 
 const DashboardPage = () => {
   const [openStates, setOpenStates] = useState({});
+  // const [columns, setColumns] = useState([
+  //   {
+  //     title: "Name",
+  //     dataIndex: "name",
+  //   }
+  // ]);
+  // const [dataSource, setDataSource] = useState([]);
 
-  const hide = (key) => {
-    setOpenStates((prevState) => ({
-      ...prevState,
-      [key]: false,
-    }));
-  };
 
-  const handleOpenChange = (key, newOpen) => {
-    setOpenStates((prevState) => ({
-      ...prevState,
-      [key]: newOpen,
-    }));
-  };
+  // useEffect(() => {
+  //   fetch('http://localhost:3000/schools')
+  //   .then(res => res.json())
+  //   .then((result) => {
+  //     setDataSource(result.schools);
+  //   });
+  // }, []);
+
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:3000/school");
+  //     const json = await response.json();
+  //     setData(json.data);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // };
+
+  // const [column, setColumn] = useState([])
+  // const [records, setRecords] = useState([])
+
+  // useEffect(() => {
+  //   fetch('http://localhost:3000/school')
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     setColumn(Object.keys(data.data[0]))
+  //     setRecords(data.data)
+  //   })
+  // })
 
   const data = [
     {
@@ -114,76 +138,77 @@ const DashboardPage = () => {
     }
   };
 
-  return (
-    <Table dataSource={data} className="table-container">
-      <Column title="Name" dataIndex="name" key="name" />
-      {/* <Column title="Sub Domain" dataIndex="subDomain" key="subDomain" /> */}
-      <Column
-        title="Sub Domain"
-        dataIndex="subDomain"
-        key="subDomain"
-        render={(subDomain) => <a href={subDomain}>{subDomain}</a>}
-      />
-      <Column title="Province" dataIndex="provinceName" key="provinceName" />
-      <Column title="Address" dataIndex="address" key="address" />
-      <Column title="Duration" dataIndex="duration" key="duration" />
-      <Column
-        title="Status"
-        dataIndex="tags"
-        key="tags"
-        render={(tags) => (
-          <>
-            {tags.map((tag) => (
-              <Tag color={getTagColor(tag)} key={tag} icon={getTagIcon(tag)}>
-                {tag}
-              </Tag>
-            ))}
-          </>
-        )}
-      />
-      <Column
-        title=""
-        key="school"
-        render={(_, record) => (
-          // <Button type="link" style={{color: "black"}}>
-          //   <a>
-          //     <MoreOutlined />
-          //   </a>
-          // </Button>
+  // const [openStates, setOpenStates] = useState({});
 
-          // <Popover
-          //   content={<a onClick={hide}>Close</a>}
-          //   title="Title"
-          //   trigger="click"
-          //   open={open}
-          //   onOpenChange={handleOpenChange}
-          // >
-          //   <Button type="primary">Click me</Button>
-          // </Popover>
+  const hide = (key) => {
+    setOpenStates((prevState) => ({
+      ...prevState,
+      [key]: false,
+    }));
+  };
 
-          <Popover
-            content={
-              <>
-                <a onClick={() => hide(record.key)}>Accept</a>
-                <Divider type="vertical" />
-                <a>Deny</a>
-              </>
-            }
-            title="Options"
-            trigger="click"
-            open={openStates[record.key]}
-            onOpenChange={(newOpen) => handleOpenChange(record.key, newOpen)}
-          >
-            <Button type="link" style={{ color: "black" }}>
-              <a>
-                <MoreOutlined />
-              </a>
-            </Button>
-          </Popover>
-        )}
-      />
-    </Table>
-  );
+  const handleOpenChange = (key, newOpen) => {
+    setOpenStates((prevState) => ({
+      ...prevState,
+      [key]: newOpen,
+    }));
+
+    return (
+      <div>
+      <Table columns={columns} dataSource={data} className="table-container">
+        <Column title="Name" dataIndex="name" key="name" />
+        <Column
+          title="Sub Domain"
+          dataIndex="subDomain"
+          key="subDomain"
+          render={(subDomain) => <a href={subDomain}>{subDomain}</a>}
+        />
+        <Column title="Province" dataIndex="provinceName" key="provinceName" />
+        <Column title="Address" dataIndex="address" key="address" />
+        <Column title="Duration" dataIndex="duration" key="duration" />
+        <Column
+          title="Status"
+          dataIndex="tags"
+          key="tags"
+          render={(tags) => (
+            <>
+              {tags.map((tag) => (
+                <Tag color={getTagColor(tag)} key={tag} icon={getTagIcon(tag)}>
+                  {tag}
+                </Tag>
+              ))}
+            </>
+          )}
+        />
+        <Column
+          title=""
+          key="school"
+          render={(_, record) => (
+            <Popover
+              content={
+                <>
+                  <a onClick={() => hide(record.key)}>Accept</a>
+                  <Divider type="vertical" />
+                  <a>Deny</a>
+                </>
+              }
+              title="Options"
+              trigger="click"
+              open={openStates[record.key]}
+              onOpenChange={(newOpen) => handleOpenChange(record.key, newOpen)}
+            >
+              <Button type="link" style={{ color: "black" }}>
+                <a>
+                  <MoreOutlined />
+                </a>
+              </Button>
+            </Popover>
+          )}
+        />
+      </Table>
+      </div>
+    );
+  };
 };
 
 export default DashboardPage;

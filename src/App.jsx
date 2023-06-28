@@ -18,6 +18,7 @@ function App() {
 
   const isDarkMode = useSelector((state) => state.darkMode);
   const { defaultAlgorithm, darkAlgorithm } = theme;
+  
 
   useEffect(() => {
     switch (userType) {
@@ -65,6 +66,7 @@ function App() {
         />
       </Routes>
     </ConfigProvider>
+    
   );
 }
 

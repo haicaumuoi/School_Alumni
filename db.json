@@ -1,23 +1,11 @@
-[
-    {
-        "status": 1
-    },
-    {
-        "status": 2
-    },
-    {
-        "status": 3
-    },
-    {
-        "status": 1
-    },
-    {
-        "status": 3
-    },
-    {
-        "status": 1
-    },
-    {
-        "status": 2
-    }
-]
+{
+  "schools": [{
+    "key": "1",
+    "name": "Trần Kim Đạt",
+    "subDomain": "http://thptthixaquangtri.quangtri.edu.vn/",
+    "provinceName": "Quảng Trị",
+    "address": "Hải Phú, Hải Lăng, Quảng Trị",
+    "tags": ["Approved"],
+    "duration": 3
+  }]
+}
