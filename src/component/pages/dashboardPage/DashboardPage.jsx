@@ -5,11 +5,10 @@ import "./DashboardPage.css";
 import { Button, Popover } from "antd";
 import db from "../../../../db.json";
 import {
-  ClockCircleOutlined,
   SyncOutlined,
   CloseCircleOutlined,
-  EllipsisOutlined,
   CheckCircleOutlined,
+  BarChartOutlined,
   MoreOutlined,
 } from "@ant-design/icons";
 
@@ -35,51 +34,57 @@ const DashboardPage = () => {
   const data = [
     {
       key: "1",
-      firstName: "John",
-      lastName: "Brown",
-      age: 32,
-      address: "New York No. 1 Lake Park",
+      name: "Trần Kim Đạt",
+      subDomain: "http://thptthixaquangtri.quangtri.edu.vn/",
+      provinceName: "Quảng Trị",
+      address: "Hải Phú, Hải Lăng, Quảng Trị",
       tags: ["Approved"],
+      duration: 3 + " months",
     },
     {
       key: "2",
-      firstName: "Jim",
-      lastName: "Green",
-      age: 42,
-      address: "London No. 1 Lake Park",
+      name: "Nguyễn Vũ Hải Anh",
+      subDomain: "https://fpt.edu.vn/",
+      provinceName: "Hải Phòng",
+      address: "Phạm Văn Chiều, Gò Vấp, TP.HCM",
       tags: ["Pending"],
+      duration: 6 + " months",
     },
     {
       key: "3",
-      firstName: "Joe",
-      lastName: "Black",
-      age: 32,
+      name: "Joe",
+      subDomain: "Black",
+      provinceName: 32,
       address: "Sydney No. 1 Lake Park",
       tags: ["Denied"],
+      duration: 3,
     },
     {
       key: "4",
-      firstName: "Joe",
-      lastName: "Black",
-      age: 32,
+      name: "Joe",
+      subDomain: "Black",
+      provinceName: 32,
       address: "Sydney No. 1 Lake Park",
       tags: ["Pending"],
+      duration: 3,
     },
     {
       key: "5",
-      firstName: "Joe",
-      lastName: "Black",
-      age: 32,
+      name: "Joe",
+      subDomain: "Black",
+      provinceName: 32,
       address: "Sydney No. 1 Lake Park",
       tags: ["Denied"],
+      duration: 3,
     },
     {
       key: "6",
-      firstName: "Joe",
-      lastName: "Black",
-      age: 32,
+      name: "Joe",
+      subDomain: "Black",
+      provinceName: 32,
       address: "Sydney No. 1 Lake Park",
       tags: ["Approved"],
+      duration: 3,
     },
   ];
 
@@ -105,16 +110,23 @@ const DashboardPage = () => {
       case "Denied":
         return <CloseCircleOutlined />;
       default:
-        return null;
+        return <SyncOutlined />;
     }
   };
 
   return (
     <Table dataSource={data} className="table-container">
-      <Column title="First Name" dataIndex="firstName" key="firstName" />
-      <Column title="Last Name" dataIndex="lastName" key="lastName" />
-      <Column title="Age" dataIndex="age" key="age" />
+      <Column title="Name" dataIndex="name" key="name" />
+      {/* <Column title="Sub Domain" dataIndex="subDomain" key="subDomain" /> */}
+      <Column
+        title="Sub Domain"
+        dataIndex="subDomain"
+        key="subDomain"
+        render={(subDomain) => <a href={subDomain}>{subDomain}</a>}
+      />
+      <Column title="Province" dataIndex="provinceName" key="provinceName" />
       <Column title="Address" dataIndex="address" key="address" />
+      <Column title="Duration" dataIndex="duration" key="duration" />
       <Column
         title="Status"
         dataIndex="tags"
@@ -152,11 +164,11 @@ const DashboardPage = () => {
           <Popover
             content={
               <>
-            <a onClick={() => hide(record.key)}>Accept</a>
-            <Divider type="vertical" />
-            <a>Deny</a>
-            </>
-          }
+                <a onClick={() => hide(record.key)}>Accept</a>
+                <Divider type="vertical" />
+                <a>Deny</a>
+              </>
+            }
             title="Options"
             trigger="click"
             open={openStates[record.key]}
