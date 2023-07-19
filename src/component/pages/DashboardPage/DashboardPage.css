@@ -1,8 +1,15 @@
 .table-container {
-    width: 100%;
-    margin-top: 1%;
-    margin-left: 0.5%;
+  width: 100%;
+  margin-top: 1%;
+  margin-left: 0.5%;
 }
 .school-table {
-    width: 100%;
+  width: 100%;
+}
+.school-table .column-count {
+    margin-top: 0px;
+}
+
+.school-table .column-statistic {
+    margin-top: 0px;
 }

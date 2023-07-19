@@ -3,6 +3,7 @@ import { Table, Tag } from "antd";
 import "./DashboardPage.css";
 import { Button, Popover } from "antd";
 import { Col, Row, Statistic } from "antd";
+import axios from "axios";
 import CountUp from "react-countup";
 import {
   SyncOutlined,
@@ -11,11 +12,8 @@ import {
   MoreOutlined,
 } from "@ant-design/icons";
 import { updateRequestStatus } from "./schoolService";
-import { getSchoolCount } from "./countSchoolService";
 
 const { Column } = Table;
-const formatter = (value) => <CountUp end={value} separator="," />;
-const formatterSchool = (value) => `${value} schools`;
 
 const DashboardPage = () => {
   const [openStates, setOpenStates] = useState({});
@@ -24,26 +22,37 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [selectedSchoolId, setSelectedSchoolId] = useState(3);
   const [schoolCount, setSchoolCount] = useState(0);
+  const [statisticsData, setStatisticsData] = useState({});
+
+  const formatterSchool = (valueAll) => `${valueAll} Schools`;
+  const formatterJune = (valueJune) => `${valueJune} schools at June`;
+  const formatterJuly = (valueJuly) => `${valueJuly} schools at July`;
 
   useEffect(() => {
     fetchDataTable();
-    // fetchDataCount();
-    const fetchSchoolCount = async () => {
-      const count = await getSchoolCount();
-      if (count !== null) {
-        setSchoolCount(count);
-      }
-    };
-    fetchSchoolCount();
+    fetchSchoolData();
+    axios
+      .get(
+        "https://alumniproject.azurewebsites.net/admin/api/schools/count?from=2023-01-01&to=2023-12-31"
+      )
+      .then((response) => {
+        // Update the school count in the state
+        setSchoolCount(response.data);
+      })
+      .catch((error) => {
+        // Handle errors if necessary
+        console.error("Error fetching school count:", error);
+      });
+    
   }, []);
 
   // const token = import.meta.env.VITE_BEARER_TOKEN;
-  const token = "bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJhbHVtbmlJZCI6IjEzIiwic2Nob29sSWQiOiItMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwiZXhwIjoxNjg5ODM2MDE0fQ.YCDJ3t4VTRAeo8-lMK919IBPG_SsDYjUDmZUFHavitibqnfIPsqqpQZfVAQTxMPYd-BsaA62ec76DoLJmmM5eA"
+  const token =
+    "bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJhbHVtbmlJZCI6IjEzIiwic2Nob29sSWQiOiItMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwiZXhwIjoxNjg5ODM2MDE0fQ.YCDJ3t4VTRAeo8-lMK919IBPG_SsDYjUDmZUFHavitibqnfIPsqqpQZfVAQTxMPYd-BsaA62ec76DoLJmmM5eA";
 
   const fetchDataTable = async () => {
     try {
       const headers = new Headers();
-
       // const token = "bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJhbHVtbmlJZCI6IjEzIiwic2Nob29sSWQiOiItMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwiZXhwIjoxNjg5ODM2MDE0fQ.YCDJ3t4VTRAeo8-lMK919IBPG_SsDYjUDmZUFHavitibqnfIPsqqpQZfVAQTxMPYd-BsaA62ec76DoLJmmM5eA"
       headers.append("Authorization", `${token}`);
       const response = await fetch(
@@ -56,7 +65,7 @@ const DashboardPage = () => {
 
       if (response.ok) {
         const jsonData = await response.json();
-        console.log(jsonData.items);
+        // console.log(jsonData.items);
         setDataSource(jsonData.items);
       } else {
         console.error("Error:", response.status);
@@ -68,32 +77,26 @@ const DashboardPage = () => {
     }
   };
 
-  // const fetchDataCount = async () => {
-  //   try {
-  //     const headers = new Headers();
-  //     // const token = import.meta.env.VITE_BEARER_TOKEN;
-  //     headers.append("Authorization", `${token}`);
-  //     const response = await fetch(
-  //       "https://alumniproject.azurewebsites.net/admin/api/schools/count?from=2023-01-01&to=2023-12-31",
-  //       {
-  //         method: "GET",
-  //         headers: headers,
-  //       }
-  //     );
+  const fetchSchoolData = async () => {
+    // try {
+    //   const response = await fetch('https://alumniproject.azurewebsites.net/admin/api/schools/statistics?from=2023-01-01&to=2023-12-31'); // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint
+    //   if (!response.ok) {
+    //     throw new Error('Network response was not ok');
+    //   }
+    //   const data = await response.json();
+    //   setStatisticsData(data);
+    // } catch (error) {
+    //   console.error('Error fetching data:', error.message);
+    //   // Handle the error here or show an error message to the user.
+    // }
+    const jsonResponse = {
+      "6": 4,
+      "7": 3
+    };
 
-  //     if (response.ok) {
-  //       const jsonData = await response.json();
-  //       console.log(jsonData.items);
-  //       setDataSource(jsonData.items);
-  //     } else {
-  //       console.error("Error:", response.status);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
+    setStatisticsData(jsonResponse);
+  };
+
 
   const handleApprove = async (record) => {
     try {
@@ -232,7 +235,9 @@ const DashboardPage = () => {
           <Divider type="vertical" />
           <a>Deny</a> */}
                   <div>
-                    <Button onClick={() => handleApprove(record)}>Approve</Button>
+                    <Button onClick={() => handleApprove(record)}>
+                      Approve
+                    </Button>
                     <Button onClick={() => handleDeny(record)}>Deny</Button>
                   </div>
                 </>
@@ -254,31 +259,43 @@ const DashboardPage = () => {
         />
       </Table>
       <Row gutter={16} className="container">
-        <Col span={12}>
-          {/* <Statistic title="Active Schools" className="active-schools" value={5} formatter={formatter}  /> */}
+        <Col span={12} className="column-count">
           <Statistic
-            title="Active Schools"
+            title="All Schools"
             className="active-schools"
             value={schoolCount}
             formatter={formatterSchool}
           />
         </Col>
-        <Col span={12}>
+        {/* <Col span={12} className="column-statistic">
           <Statistic
             title="Statistics"
             className="statistics-one"
             value={10}
             precision={2}
-            formatter={formatter}
+            formatter={formatterJune}
           />
-          June
           <Statistic
             value={20}
             className="statistics-two"
             precision={2}
-            formatter={formatter}
+            formatter={formatterJuly}
           />
-          July
+        </Col> */}
+        <Col span={12} className="column-statistic">
+          <Statistic
+            title="Statistics"
+            className="statistics-one"
+            value={statisticsData["6"] || 0}
+            precision={2}
+            formatter={formatterJune}
+          />
+          <Statistic
+            value={statisticsData["7"] || 0}
+            className="statistics-two"
+            precision={2}
+            formatter={formatterJuly}
+          />
         </Col>
       </Row>
     </div>
