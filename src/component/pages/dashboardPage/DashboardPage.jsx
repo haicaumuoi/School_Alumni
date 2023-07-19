@@ -1,14 +1,11 @@
-import { Typography } from "antd";
 import React, { useState, useEffect } from "react";
-import { Space, Table, Tag, Divider } from "antd";
+import { Table, Tag } from "antd";
 import "./DashboardPage.css";
 import { Button, Popover } from "antd";
-import db from "../../../../db.json";
 import {
   SyncOutlined,
   CloseCircleOutlined,
   CheckCircleOutlined,
-  BarChartOutlined,
   MoreOutlined,
 } from "@ant-design/icons";
 import { updateRequestStatus } from './schoolService';
@@ -30,7 +27,7 @@ const DashboardPage = () => {
     try {
       const headers = new Headers();
       const token =
-        "bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJhbHVtbmlJZCI6IjEzIiwic2Nob29sSWQiOiItMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwiZXhwIjoxNjg5NjU4NDg2fQ.xO-p3uAqPLuCSKX3P565qsArtYGe2cD6e0idNp4z_VZLeQmrLRMxAVvqE3F4GLh3lNrqA759w-jJR3aufDcM0A";
+        "bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJhbHVtbmlJZCI6IjEzIiwic2Nob29sSWQiOiItMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwiZXhwIjoxNjg5ODM2MDE0fQ.YCDJ3t4VTRAeo8-lMK919IBPG_SsDYjUDmZUFHavitibqnfIPsqqpQZfVAQTxMPYd-BsaA62ec76DoLJmmM5eA";
       headers.append("Authorization", `${token}`);
       const response = await fetch(
         "https://alumniproject.azurewebsites.net/admin/api/schools?pageNo=1&pageSize=10",
