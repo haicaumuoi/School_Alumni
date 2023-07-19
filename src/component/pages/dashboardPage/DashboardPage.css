@@ -1,4 +1,8 @@
 .table-container {
-    margin: 1.5%;
+    width: 100%;
+    margin-top: 1%;
+    margin-left: 0.5%;
+}
+.school-table {
     width: 100%;
 }
