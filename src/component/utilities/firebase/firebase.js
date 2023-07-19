@@ -17,6 +17,7 @@ const firebaseConfig = {
   measurementId: "G-0TB3LF3F3M"
 };
 
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
@@ -30,17 +31,51 @@ const googleSignIn = () => { signInWithPopup(auth, googleProvider)
     // This gives you a Google Access Token. You can use it to access the Google API.
     const credential = GoogleAuthProvider.credentialFromResult(result);
     // const aToken = credential.accessToken;
-    const iToken = credential.idToken;
+    const idToken = credential.idToken;
     // The signed-in user info.
     const user = result.user;
     // IdP data available using getAdditionalUserInfo(result)
     // ...
     // console.log(aToken)
-    console.log(iToken)
+    console.log(idToken)
+  
+      try {
+        
+        const response = fetch(
+          "https://alumniproject.azurewebsites.net/api/alumnis/login",
+          {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({token: idToken})
+          }
+        );
+  
+        if (response.ok) {
+          // const jsonData = await response.json();
+          // console.log(jsonData.items);
+          if (typeof localStorage !== "undefined") {
+            localStorage.setItem('apitoken', response.body)
+            console.log(response.body);
+          } else {
+            console.error("Can't save to local storage" );
+          } 
+        } else {
+          console.error("Error:", response);
+
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+      }
   }).catch((error) => {
   })};
 
-//FACEBOOK SIGN IN
+ 
+  
+
+// FACEBOOK SIGN IN
 const fbProvider = new FacebookAuthProvider();
 const facebookSignIn = () => {signInWithPopup(auth, fbProvider)
   .then((result) => {

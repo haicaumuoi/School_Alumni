@@ -14,6 +14,7 @@ import {
 import { updateRequestStatus } from "./schoolService";
 
 const { Column } = Table;
+const BASE_URL_STATISTIC = 'https://alumniproject.azurewebsites.net/admin/api/schools/statistics?from=2023-01-01&to=2023-12-31'
 
 const DashboardPage = () => {
   const [openStates, setOpenStates] = useState({});
@@ -29,20 +30,9 @@ const DashboardPage = () => {
   const formatterJuly = (valueJuly) => `${valueJuly} schools at July`;
 
   useEffect(() => {
-    fetchDataTable();
-    fetchSchoolData();
-    axios
-      .get(
-        "https://alumniproject.azurewebsites.net/admin/api/schools/count?from=2023-01-01&to=2023-12-31"
-      )
-      .then((response) => {
-        // Update the school count in the state
-        setSchoolCount(response.data);
-      })
-      .catch((error) => {
-        // Handle errors if necessary
-        console.error("Error fetching school count:", error);
-      });
+    fetchSchoolDataTable();
+    fetchSchoolStatistic();
+    fetchSchoolCount();
     
   }, []);
 
@@ -50,7 +40,7 @@ const DashboardPage = () => {
   const token =
     "bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJhbHVtbmlJZCI6IjEzIiwic2Nob29sSWQiOiItMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwiZXhwIjoxNjg5ODM2MDE0fQ.YCDJ3t4VTRAeo8-lMK919IBPG_SsDYjUDmZUFHavitibqnfIPsqqpQZfVAQTxMPYd-BsaA62ec76DoLJmmM5eA";
 
-  const fetchDataTable = async () => {
+  const fetchSchoolDataTable = async () => {
     try {
       const headers = new Headers();
       // const token = "bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJhbHVtbmlJZCI6IjEzIiwic2Nob29sSWQiOiItMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwiZXhwIjoxNjg5ODM2MDE0fQ.YCDJ3t4VTRAeo8-lMK919IBPG_SsDYjUDmZUFHavitibqnfIPsqqpQZfVAQTxMPYd-BsaA62ec76DoLJmmM5eA"
@@ -77,32 +67,51 @@ const DashboardPage = () => {
     }
   };
 
-  const fetchSchoolData = async () => {
-    // try {
-    //   const response = await fetch('https://alumniproject.azurewebsites.net/admin/api/schools/statistics?from=2023-01-01&to=2023-12-31'); // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint
-    //   if (!response.ok) {
-    //     throw new Error('Network response was not ok');
-    //   }
-    //   const data = await response.json();
-    //   setStatisticsData(data);
-    // } catch (error) {
-    //   console.error('Error fetching data:', error.message);
-    //   // Handle the error here or show an error message to the user.
-    // }
-    const jsonResponse = {
-      "6": 4,
-      "7": 3
-    };
+  const fetchSchoolCount = async () => {
+    axios
+      .get(
+        "https://alumniproject.azurewebsites.net/admin/api/schools/count?from=2023-01-01&to=2023-12-31"
+      )
+      .then((response) => {
+        // Update the school count in the state
+        setSchoolCount(response.data);
+      })
+      .catch((error) => {
+        // Handle errors if necessary
+        console.error("Error fetching school count:", error);
+      });
+  }
 
-    setStatisticsData(jsonResponse);
+  const fetchSchoolStatistic = async () => {
+    try {
+      const headers = new Headers();
+      headers.append("Authorization", `${token}`);
+      headers.append("Content-Type", "application/json");
+      const response = await fetch(`${BASE_URL_STATISTIC}`, {
+        method: 'GET',
+        headers: headers
+      }); // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      setStatisticsData(data);
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+      // Handle the error here or show an error message to the user.
+    }
+    // const jsonResponse = {
+    //   "6": 4,
+    //   "7": 9
+    // };
+    // setStatisticsData(jsonResponse);
   };
-
 
   const handleApprove = async (record) => {
     try {
       const { id } = record;
       const approve = 2;
-      await updateRequestStatus({ id, approve });
+      await updateRequestStatus({ id, requestStatus: approve });
     } catch (error) {}
   };
 
@@ -110,7 +119,7 @@ const DashboardPage = () => {
     try {
       const { id } = record;
       const deny = 3;
-      await updateRequestStatus({ id, deny });
+      await updateRequestStatus({ id, requestStatus: deny });
     } catch (error) {}
   };
 
