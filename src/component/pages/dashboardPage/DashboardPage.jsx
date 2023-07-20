@@ -4,7 +4,7 @@ import "./DashboardPage.css";
 import { Button, Popover } from "antd";
 import { Col, Row, Statistic } from "antd";
 import axios from "axios";
-import CountUp from "react-countup";
+import Chart from "chart.js/auto";
 import {
   SyncOutlined,
   CloseCircleOutlined,
@@ -13,8 +13,10 @@ import {
 } from "@ant-design/icons";
 import { updateRequestStatus } from "./schoolService";
 
+
 const { Column } = Table;
-const BASE_URL_STATISTIC = 'https://alumniproject.azurewebsites.net/admin/api/schools/statistics?from=2023-01-01&to=2023-12-31'
+const BASE_URL_STATISTIC =
+  "https://alumniproject.azurewebsites.net/admin/api/schools/statistics?from=2023-01-01&to=2023-12-31";
 
 const DashboardPage = () => {
   const [openStates, setOpenStates] = useState({});
@@ -26,17 +28,15 @@ const DashboardPage = () => {
   const [statisticsData, setStatisticsData] = useState({});
 
   const formatterSchool = (valueAll) => `${valueAll} Schools`;
-  const formatterJune = (valueJune) => `${valueJune} schools at June`;
-  const formatterJuly = (valueJuly) => `${valueJuly} schools at July`;
 
   useEffect(() => {
     fetchSchoolDataTable();
     fetchSchoolStatistic();
     fetchSchoolCount();
-    
   }, []);
 
   // const token = import.meta.env.VITE_BEARER_TOKEN;
+
   const token =
     "bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJhbHVtbmlJZCI6IjEzIiwic2Nob29sSWQiOiItMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwiZXhwIjoxNjg5ODM2MDE0fQ.YCDJ3t4VTRAeo8-lMK919IBPG_SsDYjUDmZUFHavitibqnfIPsqqpQZfVAQTxMPYd-BsaA62ec76DoLJmmM5eA";
 
@@ -80,7 +80,7 @@ const DashboardPage = () => {
         // Handle errors if necessary
         console.error("Error fetching school count:", error);
       });
-  }
+  };
 
   const fetchSchoolStatistic = async () => {
     try {
@@ -88,23 +88,73 @@ const DashboardPage = () => {
       headers.append("Authorization", `${token}`);
       headers.append("Content-Type", "application/json");
       const response = await fetch(`${BASE_URL_STATISTIC}`, {
-        method: 'GET',
-        headers: headers
+        method: "GET",
+        headers: headers,
       }); // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
+      console.log(response);
       setStatisticsData(data);
     } catch (error) {
       console.error("Error fetching data:", error.message);
       // Handle the error here or show an error message to the user.
     }
-    // const jsonResponse = {
-    //   "6": 4,
-    //   "7": 9
-    // };
-    // setStatisticsData(jsonResponse);
+  };
+
+  const ChartComponent = ({ statisticsData }) => {
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const labels = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ];
+          const dataArr = labels.map(
+            (month, index) => statisticsData[index + 1] || 0
+          );
+
+          const ctx = document.getElementById("myChart");
+          new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: "# of Schools",
+                  data: dataArr,
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true,
+                },
+              },
+            },
+          });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+
+      fetchData();
+    }, [statisticsData]);
+
+    return <canvas id="myChart" width="400" height="200"></canvas>;
   };
 
   const handleApprove = async (record) => {
@@ -276,36 +326,9 @@ const DashboardPage = () => {
             formatter={formatterSchool}
           />
         </Col>
-        {/* <Col span={12} className="column-statistic">
-          <Statistic
-            title="Statistics"
-            className="statistics-one"
-            value={10}
-            precision={2}
-            formatter={formatterJune}
-          />
-          <Statistic
-            value={20}
-            className="statistics-two"
-            precision={2}
-            formatter={formatterJuly}
-          />
-        </Col> */}
-        <Col span={12} className="column-statistic">
-          <Statistic
-            title="Statistics"
-            className="statistics-one"
-            value={statisticsData["6"] || 0}
-            precision={2}
-            formatter={formatterJune}
-          />
-          <Statistic
-            value={statisticsData["7"] || 0}
-            className="statistics-two"
-            precision={2}
-            formatter={formatterJuly}
-          />
-        </Col>
+        <div className="chart-statistic">
+          <ChartComponent statisticsData={statisticsData} />
+        </div>
       </Row>
     </div>
   );
