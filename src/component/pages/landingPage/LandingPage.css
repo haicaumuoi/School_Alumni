@@ -118,7 +118,7 @@ nav {
 }
 .secondary-button {
   padding: 1rem 2.5rem;
-  background-color: #fe9e0d;
+  background-color: orange;
   outline: none;
   border: none;
   border-radius: 5rem;
@@ -138,10 +138,10 @@ nav {
   display: inline-block;
 }
 .secondary-button:hover {
-  background-color: #e48f0f;
+  background-color: rgb(13, 207, 13);
 }
 .secondary-button:hover a {
-  color: black;
+  color: white;
 }
 .about-section-container {
   margin-top: 20rem;
