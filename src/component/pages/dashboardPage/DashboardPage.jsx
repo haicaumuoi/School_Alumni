@@ -13,7 +13,6 @@ import {
 } from "@ant-design/icons";
 import { updateRequestStatus } from "./schoolService";
 
-
 const { Column } = Table;
 const BASE_URL_STATISTIC =
   "https://alumniproject.azurewebsites.net/admin/api/schools/statistics?from=2023-01-01&to=2023-12-31";
@@ -52,7 +51,7 @@ const DashboardPage = () => {
       // const token = "bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJhbHVtbmlJZCI6IjEzIiwic2Nob29sSWQiOiItMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwiZXhwIjoxNjg5ODM2MDE0fQ.YCDJ3t4VTRAeo8-lMK919IBPG_SsDYjUDmZUFHavitibqnfIPsqqpQZfVAQTxMPYd-BsaA62ec76DoLJmmM5eA"
       headers.append("Authorization", `${token}`);
       const response = await fetch(
-        "https://alumniproject.azurewebsites.net/admin/api/schools?pageNo=1&pageSize=10",
+        "https://alumniproject.azurewebsites.net/admin/api/schools?pageNo=1&pageSize=20",
         {
           method: "GET",
           headers: headers,
