@@ -38,7 +38,6 @@ const DashboardPage = () => {
     fetchSchoolCountByStatus1();
     fetchSchoolCountByStatus2();
     fetchSchoolCountByStatus3();
-    setLoading(false);
   }, []);
 
   // const token = import.meta.env.VITE_BEARER_TOKEN;
@@ -82,6 +81,7 @@ const DashboardPage = () => {
       .then((response) => {
         // Update the school count in the state
         setSchoolCount(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         // Handle errors if necessary
@@ -97,6 +97,7 @@ const DashboardPage = () => {
       .then((response) => {
         // Update the school count in the state
         setSchoolCountStatus1(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         // Handle errors if necessary
@@ -112,6 +113,7 @@ const DashboardPage = () => {
       .then((response) => {
         // Update the school count in the state
         setSchoolCountStatus2(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         // Handle errors if necessary
@@ -127,6 +129,7 @@ const DashboardPage = () => {
       .then((response) => {
         // Update the school count in the state
         setSchoolCountStatus3(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         // Handle errors if necessary
@@ -149,6 +152,7 @@ const DashboardPage = () => {
       const data = await response.json();
       console.log(response);
       setStatisticsData(data);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error.message);
       // Handle the error here or show an error message to the user.
