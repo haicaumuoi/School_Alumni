@@ -25,6 +25,9 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [selectedSchoolId, setSelectedSchoolId] = useState(3);
   const [schoolCount, setSchoolCount] = useState(0);
+  const [schoolCountStatus1, setSchoolCountStatus1] = useState(0);
+  const [schoolCountStatus2, setSchoolCountStatus2] = useState(0);
+  const [schoolCountStatus3, setSchoolCountStatus3] = useState(0);
   const [statisticsData, setStatisticsData] = useState({});
 
   const formatterSchool = (valueAll) => `${valueAll} Schools`;
@@ -33,6 +36,9 @@ const DashboardPage = () => {
     fetchSchoolDataTable();
     fetchSchoolStatistic();
     fetchSchoolCount();
+    fetchSchoolCountByStatus1();
+    fetchSchoolCountByStatus2();
+    fetchSchoolCountByStatus3();
   }, []);
 
   // const token = import.meta.env.VITE_BEARER_TOKEN;
@@ -75,6 +81,51 @@ const DashboardPage = () => {
       .then((response) => {
         // Update the school count in the state
         setSchoolCount(response.data);
+      })
+      .catch((error) => {
+        // Handle errors if necessary
+        console.error("Error fetching school count:", error);
+      });
+  };
+
+  const fetchSchoolCountByStatus1 = async () => {
+    axios
+      .get(
+        "https://alumniproject.azurewebsites.net/admin/api/schools/count/status?from=2023-01-01&to=2023-12-31&status=1"
+      )
+      .then((response) => {
+        // Update the school count in the state
+        setSchoolCountStatus1(response.data);
+      })
+      .catch((error) => {
+        // Handle errors if necessary
+        console.error("Error fetching school count:", error);
+      });
+  };
+
+  const fetchSchoolCountByStatus2 = async () => {
+    axios
+      .get(
+        "https://alumniproject.azurewebsites.net/admin/api/schools/count/status?from=2023-01-01&to=2023-12-31&status=2"
+      )
+      .then((response) => {
+        // Update the school count in the state
+        setSchoolCountStatus2(response.data);
+      })
+      .catch((error) => {
+        // Handle errors if necessary
+        console.error("Error fetching school count:", error);
+      });
+  };
+
+  const fetchSchoolCountByStatus3 = async () => {
+    axios
+      .get(
+        "https://alumniproject.azurewebsites.net/admin/api/schools/count/status?from=2023-01-01&to=2023-12-31&status=3"
+      )
+      .then((response) => {
+        // Update the school count in the state
+        setSchoolCountStatus3(response.data);
       })
       .catch((error) => {
         // Handle errors if necessary
@@ -132,7 +183,7 @@ const DashboardPage = () => {
               labels: labels,
               datasets: [
                 {
-                  label: "# of Schools",
+                  label: "# of Schools from 01-01-2023 to 31-12-2023",
                   data: dataArr,
                   borderWidth: 1,
                 },
@@ -318,11 +369,35 @@ const DashboardPage = () => {
         />
       </Table>
       <Row gutter={16} className="container">
-        <Col span={12} className="column-count">
+        <Col span={3} className="column-count-all">
           <Statistic
             title="All Schools"
             className="active-schools"
             value={schoolCount}
+            formatter={formatterSchool}
+          />
+        </Col>
+        <Col span={3} className="column-count">
+          <Statistic
+            title="Schools Pending"
+            className="active-schools"
+            value={schoolCountStatus1}
+            formatter={formatterSchool}
+          />
+        </Col>
+        <Col span={3} className="column-count">
+          <Statistic
+            title="Schools Approved"
+            className="active-schools"
+            value={schoolCountStatus2}
+            formatter={formatterSchool}
+          />
+        </Col>
+        <Col span={3} className="column-count">
+          <Statistic
+            title="Schools Denied"
+            className="active-schools"
+            value={schoolCountStatus3}
             formatter={formatterSchool}
           />
         </Col>

@@ -6,9 +6,6 @@
 .school-table {
   width: 100%;
 }
-.school-table .column-count {
-    margin-top: 0px;
-}
 
 .school-table .column-statistic {
     margin-top: 0px;
@@ -16,4 +13,5 @@
 .chart-statistic {
   width: 500px;
   height: 500px;
+  margin-left: 10%;
 }
