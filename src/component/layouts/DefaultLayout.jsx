@@ -43,7 +43,7 @@ const DefaultLayout = ({ children }) => {
                     {/* </Content>
                 </Layout> */}
             </Layout>
-            <Footer style={{ textAlign: 'center', background: '#001529', color: 'white' }}>School Alumni ©2023 | Created by Hapi-Team</Footer>
+            <Footer style={{ textAlign: 'center', background: 'blue', color: 'white' }}>School Alumni ©2023 | Created by Hapi-Team</Footer>
         </Layout>
     );
 };
