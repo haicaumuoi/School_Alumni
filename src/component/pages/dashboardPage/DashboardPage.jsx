@@ -61,7 +61,9 @@ const DashboardPage = () => {
       if (response.ok) {
         const jsonData = await response.json();
         // console.log(jsonData.items);
+        jsonData.items.reverse();
         setDataSource(jsonData.items);
+        console.log(jsonData.items);
         setLoading(false);
       } else {
         console.error("Error:", response.status);
